@@ -1,7 +1,6 @@
 package com.example.mongo.controller;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +18,10 @@ public class CustomerController {
 	@Autowired
 	private CustomerRepository repository;
 
-	private final AtomicLong counter = new AtomicLong();
-	
-	@RequestMapping("/controller")
+	@RequestMapping("/customer")
 	@ResponseBody
 	public ResponseEntity<List<Customer>> getController() {
-		List<Customer> customers = repository.findAll();
+		List<Customer> customers = repository.findAllByName("Bob");
 		return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
 	}
 }
